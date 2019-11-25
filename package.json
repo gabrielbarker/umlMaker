@@ -1,0 +1,22 @@
+{
+  "name": "umlmaker",
+  "version": "1.0.0",
+  "description": "A CLI app that makes and draws UML diagrams",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielbarker/umlMaker.git"
+  },
+  "keywords": [
+    "UML"
+  ],
+  "author": "gabrielbarker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabrielbarker/umlMaker/issues"
+  },
+  "homepage": "https://github.com/gabrielbarker/umlMaker#readme"
+}
