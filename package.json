@@ -1,9 +1,10 @@
 {
   "name": "umlmaker",
   "version": "1.0.0",
-  "description": "A CLI app that makes and draws UML diagrams",
-  "main": "index.js",
+  "description": "An Electron app that makes and draws UML diagrams",
+  "main": "main.js",
   "scripts": {
+    "start": "electron .",
     "test": "mocha"
   },
   "repository": {
@@ -18,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/gabrielbarker/umlMaker/issues"
   },
-  "homepage": "https://github.com/gabrielbarker/umlMaker#readme"
+  "homepage": "https://github.com/gabrielbarker/umlMaker#readme",
+  "dependencies": {
+    "electron": "^7.1.2"
+  }
 }
