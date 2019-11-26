@@ -1,0 +1,23 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.class {
+  background-color: white;
+  width: 20%;
+  border: 1px;
+}
+
+.class h1 {
+  font-weight: bold;
+  border: 1px;
+}
+
+.variables {
+  font-style: italic;
+  border: 1px;
+}
+
+.methods {
+  border: 1px;
+}
