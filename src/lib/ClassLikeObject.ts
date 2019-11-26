@@ -1,7 +1,9 @@
 import IObject from "./IObject";
 import { ObjectType } from "./ObjectType";
+import DragHandler from "./DragHandler";
+import IDraggable from "./IDragabble";
 
-export default class ClassLikeObject implements IObject {
+export default abstract class ClassLikeObject implements IObject, IDraggable {
   private _type: ObjectType = ObjectType.Default;
   private _name: string = "ClassLikeObject";
   private _position: [number, number] = [0, 0];
@@ -10,8 +12,15 @@ export default class ClassLikeObject implements IObject {
   private _methods: string[] = [];
   private _variables: string[] = [];
 
+  public dragHandler = new DragHandler();
+
+  //#region Getters/Setters
   getType(): ObjectType {
     return this._type;
+  }
+
+  getTypeAsString(): string {
+    return this._type.toString();
   }
 
   getName(): string {
@@ -65,9 +74,22 @@ export default class ClassLikeObject implements IObject {
   setVariables(variables: string[]) {
     this._variables = variables;
   }
+  //#endregion
 
   draw() {
-    return;
+    const methods = this.getMethods();
+    const variables = this.getVariables();
+
+    let html = `<div id="${this.getName()}" class="${this.getTypeAsString()}">	
+      <h1>${this.getName()}</h1>	
+        <div class="methods">`;
+    methods.forEach(m => (html += `<p>+${m}</p>`));
+    html += `</div>	
+    <div class="variables">`;
+    variables.forEach(v => (html += `<p>+${v}</p>`));
+    html += `</div>	
+    </div>`;
+    return html;
   }
 
   drawArrowFrom(from: IObject) {
