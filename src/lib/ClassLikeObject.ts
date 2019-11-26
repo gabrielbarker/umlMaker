@@ -76,10 +76,10 @@ export default abstract class ClassLikeObject implements IObject, IDraggable {
 
     let html = `<div id="${this.getName()}" class="${this.getType()}">
       <h1>${this.getName()}</h1>
-        <div class="${methods}">`;
+        <div class="methods">`;
     methods.forEach(m => (html += `<p>+${m}</p>`));
     html += `</div>
-    <div class="${variables}">`;
+    <div class="variables">`;
     variables.forEach(v => (html += `<p>+${v}</p>`));
     html += `</div>
     </div>`;
