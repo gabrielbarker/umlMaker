@@ -1,6 +1,6 @@
 body {
   /* VARIABLES */
-  --zoom-factor: 1;
+  --zoom-factor: 0.8;
   --object-width: calc((20% / var(--zoom-factor)));
   --object-height: calc((50% / var(--zoom-factor)));
   --font-size: calc((1em / var(--zoom-factor)));
@@ -8,37 +8,74 @@ body {
 
   font-family: Arial, Helvetica, sans-serif;
   font-size: var(--font-size);
-  background-color: green;
+  background-color: lightyellow;
 }
 
-.class {
-  background-color: white;
+.class,
+.interface {
+  background-color: rgb(255, 182, 193);
   width: var(--object-width);
   /* height: var(--object-height); */
-  border: 1px solid black;
-  margin-bottom: 5px;
+  /* border: 1px solid black; */
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 6px 6px 4px rgba(0, 0, 0, 0.3);
 }
 
-.class h1 {
+.interface {
+  background-color: rgb(230, 230, 250);
+}
+
+.class h1,
+.interface h1 {
+  background-color: rgb(255, 240, 245);
   margin: auto;
   padding: var(--class-padding);
   font-weight: bold;
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
 
-.class p {
+.interface h1 {
+  background-color: rgb(251, 240, 255);
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.interface h3 {
+  background-color: rgb(251, 240, 255);
+  margin: auto;
+  padding: var(--class-padding);
+  font-weight: bold;
+  font-size: var(--font-size);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.class p,
+.interface p {
   margin: auto;
   padding: var(--class-padding);
 }
 
-.variables {
-  margin: auto;
-  padding: var(--class-padding);
-  font-style: italic;
-}
-
+.variables,
 .methods {
   margin: auto;
   padding: var(--class-padding);
-  border-bottom: 1px solid black;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.variables {
+  /* border-bottom: 1px solid black; */
+  font-style: italic;
+}
+
+.class .methods {
+  background-color: rgb(255, 154, 169);
+}
+
+.interface .methods {
+  background-color: rgb(200, 200, 248);
 }
