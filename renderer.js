@@ -1,13 +1,12 @@
 const ipc = require("electron").ipcRenderer;
+const DragHandler = require("./dist/DragHandler").default;
 drawSomeClasses();
 
 function drawSomeClasses() {
   const Diagram = require("./dist/Diagram").default;
   const ClassObject = require("./dist/ClassObject").default;
   const InterfaceObject = require("./dist/InterfaceObject").default;
-  const DragHandler = require("./dist/DragHandler").default;
 
-  const dragHandler = new DragHandler();
   const diagram = new Diagram();
 
   const carClass = new ClassObject();
@@ -35,9 +34,20 @@ function drawSomeClasses() {
   diagram.addObject(trikeInterface);
 
   diagram.Objects.forEach(o => {
-    document.querySelector("body").innerHTML += o.html();
+    document.querySelector("body").appendChild(createDraggableElement(o));
   });
 
-  const allObjects = document.querySelectorAll(".Object");
-  allObjects.forEach(o => dragHandler.dragElement(o));
+  // const allObjects = document.querySelectorAll(".Object");
+  // allObjects.forEach((o, i) => dragHandler.dragElement(o, diagram.Objects[i]));
+}
+
+function createDraggableElement(object) {
+  const dragHandler = new DragHandler();
+  const div = document.createElement("div");
+  div.innerHTML = object.html();
+  const element = div.querySelector("div");
+  element.style.left = object.getPosition()[0];
+  element.style.top = object.getPosition()[1];
+  dragHandler.dragElement(element, object);
+  return element;
 }

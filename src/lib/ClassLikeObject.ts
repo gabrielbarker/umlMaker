@@ -6,7 +6,10 @@ import IDraggable from "./IDragabble";
 export default abstract class ClassLikeObject implements IObject, IDraggable {
   private _type: ObjectType = ObjectType.Default;
   private _name: string = "ClassLikeObject";
-  private _position: [number, number] = [0, 0];
+  private _position: [number, number] = [
+    Math.floor(Math.random() * 500),
+    Math.floor(Math.random() * 500)
+  ];
   private _inherits: IObject = this;
   private _implements: IObject[] = [];
   private _methods: string[] = [];
@@ -72,7 +75,7 @@ export default abstract class ClassLikeObject implements IObject, IDraggable {
   }
   //#endregion
 
-  html() {
+  html(): string {
     const methods = this.getMethods();
     const variables = this.getVariables();
 
@@ -84,8 +87,8 @@ export default abstract class ClassLikeObject implements IObject, IDraggable {
     html += `</div>	
         <div class="methods">`;
     methods.forEach(m => (html += `<p>+${m}()</p>`));
-    html += `</div>	
-    </div>`;
+    html += `</div>`;
+    html += `</div>`;
     return html;
   }
 
