@@ -72,11 +72,11 @@ export default abstract class ClassLikeObject implements IObject, IDraggable {
   }
   //#endregion
 
-  draw() {
+  html() {
     const methods = this.getMethods();
     const variables = this.getVariables();
 
-    let html = `<div id="${this.getName()}" class="${this.getType()}">`;
+    let html = `<div id="${this.getName()}" class="${this.getType()} ClassLike Object">`;
     if (this.getType() === ObjectType.Interface) html += `<h3>interface</h3>`;
     html += `<h1>${this.getName()}</h1>	
         <div class="variables">`;

@@ -20,11 +20,24 @@ function drawSomeClasses() {
   bikeInterface.setName("Bike");
   bikeInterface.setMethods(["steer", "brake"]);
   bikeInterface.setVariables(["gears", "pedals", "basket"]);
-  // diagram.addObject(bikeInterface);
+  diagram.addObject(bikeInterface);
+
+  const vanClass = new ClassObject();
+  vanClass.setName("Van");
+  vanClass.setMethods(["drive", "steer", "brake"]);
+  vanClass.setVariables(["gears", "pedals"]);
+  diagram.addObject(vanClass);
+
+  const trikeInterface = new InterfaceObject();
+  trikeInterface.setName("Trike");
+  trikeInterface.setMethods(["steer", "brake"]);
+  trikeInterface.setVariables(["gears", "pedals", "basket"]);
+  diagram.addObject(trikeInterface);
 
   diagram.Objects.forEach(o => {
-    document.querySelector("body").innerHTML += o.draw();
+    document.querySelector("body").innerHTML += o.html();
   });
 
-  dragHandler.dragElement(document.querySelector(".Class"));
+  const allObjects = document.querySelectorAll(".Object");
+  allObjects.forEach(o => dragHandler.dragElement(o));
 }

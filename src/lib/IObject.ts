@@ -9,6 +9,6 @@ export default interface IObject {
   setName(name: String): void;
   setPosition(position: [number, number]): void;
 
-  draw(): void;
+  html(): string;
   drawArrowFrom(from: IObject): void;
 }
