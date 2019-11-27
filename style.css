@@ -13,6 +13,7 @@ body {
 
 .class,
 .interface {
+  position: absolute;
   background-color: rgb(255, 182, 193);
   width: var(--object-width);
   /* height: var(--object-height); */
