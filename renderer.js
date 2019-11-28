@@ -11,7 +11,7 @@ function drawSomeClasses() {
 
   const carClass = new ClassObject();
   carClass.setName("Car");
-  carClass.setMethods(["driveReallyReallyFast", "steer", "brake"]);
+  carClass.setMethods(["drive", "steer", "brake"]);
   carClass.setVariables(["gears", "pedals"]);
   diagram.addObject(carClass);
 
@@ -33,15 +33,16 @@ function drawSomeClasses() {
   trikeInterface.setVariables(["gears", "pedals", "basket"]);
   diagram.addObject(trikeInterface);
 
+  const objects = diagram.Objects;
+  for (let i = 1; i < objects.length; i++) {
+    document.querySelector("svg").innerHTML += objects[0].htmlArrowTo(
+      objects[i]
+    );
+  }
+
   diagram.Objects.forEach(o => {
     document.querySelector("body").appendChild(createDraggableElement(o));
   });
-  const objects = diagram.Objects;
-  for (let i = 1; i < 2; i++) {
-    document
-      .querySelector("svg")
-      .appendChild(createArrowBetweenObjects(objects[i], objects[i - 1]));
-  }
 }
 
 function createDraggableElement(object) {

@@ -7,8 +7,8 @@ export default abstract class ClassLikeObject implements IObject, IDraggable {
   private _type: ObjectType = ObjectType.Default;
   private _name: string = "ClassLikeObject";
   private _position: [number, number] = [
-    Math.floor(Math.random() * 500),
-    Math.floor(Math.random() * 500)
+    Math.floor(Math.random() * 900),
+    Math.floor(Math.random() * 700)
   ];
   private _inherits: IObject = this;
   private _implements: IObject[] = [];
@@ -95,7 +95,7 @@ export default abstract class ClassLikeObject implements IObject, IDraggable {
   htmlArrowTo(to: IObject) {
     const fromPosition = this.getPosition();
     const toPosition = to.getPosition();
-    let svgLine = `<line x1="${fromPosition[0]}" y1="${fromPosition[1]}" x2="${toPosition[0]}" y2="${toPosition[1]}" stroke="rgb(255,0,0)" stroke-width="2" />`;
+    let svgLine = `<line x1="${fromPosition[0]}" y1="${fromPosition[1]}" x2="${toPosition[0]}" y2="${toPosition[1]}" stroke="rgb(255,0,0)" stroke-width="2"></line>`;
     return svgLine;
   }
 }
