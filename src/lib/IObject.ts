@@ -10,5 +10,5 @@ export default interface IObject {
   setPosition(position: [number, number]): void;
 
   html(): string;
-  drawArrowFrom(from: IObject): void;
+  htmlArrowTo(from: IObject): void;
 }

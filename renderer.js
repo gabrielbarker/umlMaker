@@ -11,7 +11,7 @@ function drawSomeClasses() {
 
   const carClass = new ClassObject();
   carClass.setName("Car");
-  carClass.setMethods(["drive", "steer", "brake"]);
+  carClass.setMethods(["driveReallyReallyFast", "steer", "brake"]);
   carClass.setVariables(["gears", "pedals"]);
   diagram.addObject(carClass);
 
@@ -36,9 +36,12 @@ function drawSomeClasses() {
   diagram.Objects.forEach(o => {
     document.querySelector("body").appendChild(createDraggableElement(o));
   });
-
-  // const allObjects = document.querySelectorAll(".Object");
-  // allObjects.forEach((o, i) => dragHandler.dragElement(o, diagram.Objects[i]));
+  const objects = diagram.Objects;
+  for (let i = 1; i < 2; i++) {
+    document
+      .querySelector("svg")
+      .appendChild(createArrowBetweenObjects(objects[i], objects[i - 1]));
+  }
 }
 
 function createDraggableElement(object) {
@@ -50,4 +53,11 @@ function createDraggableElement(object) {
   element.style.top = object.getPosition()[1];
   dragHandler.dragElement(element, object);
   return element;
+}
+
+function createArrowBetweenObjects(from, to) {
+  const div = document.createElement("div");
+  const svgLine = from.htmlArrowTo(to);
+  div.innerHTML += svgLine;
+  return div.querySelector("line");
 }

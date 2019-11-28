@@ -92,7 +92,10 @@ export default abstract class ClassLikeObject implements IObject, IDraggable {
     return html;
   }
 
-  drawArrowFrom(from: IObject) {
-    return;
+  htmlArrowTo(to: IObject) {
+    const fromPosition = this.getPosition();
+    const toPosition = to.getPosition();
+    let svgLine = `<line x1="${fromPosition[0]}" y1="${fromPosition[1]}" x2="${toPosition[0]}" y2="${toPosition[1]}" stroke="rgb(255,0,0)" stroke-width="2" />`;
+    return svgLine;
   }
 }

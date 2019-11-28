@@ -1,23 +1,24 @@
 body {
   /* VARIABLES */
-  --zoom-factor: 0.8;
-  --object-width: calc((20% / var(--zoom-factor)));
-  --object-height: calc((50% / var(--zoom-factor)));
+  --zoom-factor: 0.7;
+  --object-min-width: calc((5em / var(--zoom-factor)));
+  --object-min-height: calc((10em / var(--zoom-factor)));
   --font-size: calc((1em / var(--zoom-factor)));
+  --font-size-interface-tag: calc((0.8em / var(--zoom-factor)));
   --class-padding: calc((1% / var(--zoom-factor)));
+  --class-left-padding: calc((0.2em / var(--zoom-factor)));
+  --class-left-heading-padding: calc((0.4em / var(--zoom-factor)));
 
   font-family: Arial, Helvetica, sans-serif;
   font-size: var(--font-size);
-  background-color: lightyellow;
+  background-color: #888;
 }
 
 .class,
 .interface {
   position: absolute;
   background-color: rgb(255, 182, 193);
-  width: var(--object-width);
-  /* height: var(--object-height); */
-  /* border: 1px solid black; */
+  min-width: var(--object-min-width);
   margin-bottom: 20px;
   border-radius: 5px;
   box-shadow: 6px 6px 4px rgba(0, 0, 0, 0.3);
@@ -32,6 +33,9 @@ body {
   background-color: rgb(255, 240, 245);
   margin: auto;
   padding: var(--class-padding);
+  padding-left: var(--class-left-padding);
+  padding-right: var(--class-left-padding);
+  padding: var(5%);
   font-weight: bold;
   /* border-bottom: 1px solid black; */
   border-top-right-radius: 5px;
@@ -40,16 +44,16 @@ body {
 
 .interface h1 {
   background-color: rgb(251, 240, 255);
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
 }
 
 .interface h3 {
   background-color: rgb(251, 240, 255);
   margin: auto;
-  padding: var(--class-padding);
-  font-weight: bold;
-  font-size: var(--font-size);
+  padding-left: var(--class-left-padding);
+  padding-right: var(--class-left-padding);
+  font-weight: lighter;
+  font-style: italic;
+  font-size: var(--font-size-interface-tag);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
@@ -58,12 +62,16 @@ body {
 .interface p {
   margin: auto;
   padding: var(--class-padding);
+  padding-left: var(--class-left-padding);
+  padding-right: var(--class-left-padding);
 }
 
 .variables,
 .methods {
   margin: auto;
   padding: var(--class-padding);
+  padding-left: var(--class-left-padding);
+  padding-right: var(--class-left-padding);
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
 }
