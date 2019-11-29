@@ -33,11 +33,14 @@ function drawSomeClasses() {
   trikeInterface.setVariables(["gears", "pedals", "basket"]);
   diagram.addObject(trikeInterface);
 
+  carClass.setInherits(bikeInterface);
+  trikeInterface.setInherits(vanClass);
+  trikeInterface.getImplements().push(vanClass);
+
+  console.log(bikeInterface);
   const objects = diagram.Objects;
   for (let i = 1; i < objects.length; i++) {
-    document.querySelector("svg").innerHTML += objects[0].htmlArrowTo(
-      objects[i]
-    );
+    document.querySelector("svg").innerHTML += objects[0].htmlArrowTo(objects[i]);
   }
 
   diagram.Objects.forEach(o => {
@@ -61,4 +64,8 @@ function createArrowBetweenObjects(from, to) {
   const svgLine = from.htmlArrowTo(to);
   div.innerHTML += svgLine;
   return div.querySelector("line");
+}
+
+function getArrowBetween(from, to) {
+  return document.querySelector(`${from.getName()}-${to.getName()}-line`);
 }

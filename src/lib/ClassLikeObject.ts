@@ -2,16 +2,20 @@ import IObject from "./IObject";
 import { ObjectType } from "./ObjectType";
 import DragHandler from "./DragHandler";
 import IDraggable from "./IDragabble";
+import IClassLike from "./IClassLike";
+import NonObject from "./NonObject";
 
-export default abstract class ClassLikeObject implements IObject, IDraggable {
+export default abstract class ClassLikeObject implements IClassLike, IDraggable {
   private _type: ObjectType = ObjectType.Default;
   private _name: string = "ClassLikeObject";
   private _position: [number, number] = [
     Math.floor(Math.random() * 900),
     Math.floor(Math.random() * 700)
   ];
-  private _inherits: IObject = this;
-  private _implements: IObject[] = [];
+  private _inherits: IClassLike = new NonObject();
+  private _inheritedBy: IClassLike[] = [];
+  private _implements: IClassLike[] = [];
+  private _implementedBy: IClassLike[] = [];
   private _methods: string[] = [];
   private _variables: string[] = [];
 
@@ -30,12 +34,19 @@ export default abstract class ClassLikeObject implements IObject, IDraggable {
     return this._position;
   }
 
-  getInherits(): IObject {
+  getInherits(): IClassLike {
     return this._inherits;
   }
 
-  getImplements(): IObject[] {
+  getInheritedBy(): IClassLike[] {
+    return this._inheritedBy;
+  }
+
+  getImplements(): IClassLike[] {
     return this._implements;
+  }
+  getImplementedBy(): IClassLike[] {
+    return this._implementedBy;
   }
 
   getMethods(): string[] {
@@ -46,31 +57,44 @@ export default abstract class ClassLikeObject implements IObject, IDraggable {
     return this._variables;
   }
 
-  setType(type: ObjectType) {
+  setType(type: ObjectType): void {
     this._type = type;
   }
 
-  setName(name: string) {
+  setName(name: string): void {
     this._name = name;
   }
 
-  setPosition(position: [number, number]) {
+  setPosition(position: [number, number]): void {
     this._position = position;
   }
 
-  setInherits(inherits: IObject) {
+  setInherits(inherits: IClassLike): void {
     this._inherits = inherits;
+    inherits.getInheritedBy().push(this);
   }
 
-  setImplements(impl: IObject[]) {
+  setInheritedBy(inheritedBy: IClassLike[]): void {
+    this._inheritedBy = inheritedBy;
+  }
+
+  setImplements(impl: IClassLike[]): void {
     this._implements = impl;
   }
 
-  setMethods(methods: string[]) {
+  addToImplements(impl: IClassLike): void {
+    this._implements.push(impl);
+  }
+
+  setImplementedBy(impl: IClassLike[]): void {
+    this._implementedBy = impl;
+  }
+
+  setMethods(methods: string[]): void {
     this._methods = methods;
   }
 
-  setVariables(variables: string[]) {
+  setVariables(variables: string[]): void {
     this._variables = variables;
   }
   //#endregion
@@ -95,7 +119,26 @@ export default abstract class ClassLikeObject implements IObject, IDraggable {
   htmlArrowTo(to: IObject) {
     const fromPosition = this.getPosition();
     const toPosition = to.getPosition();
-    let svgLine = `<line x1="${fromPosition[0]}" y1="${fromPosition[1]}" x2="${toPosition[0]}" y2="${toPosition[1]}" stroke="rgb(255,0,0)" stroke-width="2"></line>`;
+    let svgLine = `<line class="arrow" id="${this.getName()}-${to.getName()}-line"
+     x1="${fromPosition[0]}" y1="${fromPosition[1]}" 
+     x2="${toPosition[0]}" y2="${toPosition[1]}"
+    stroke="rgb(255,0,0)" stroke-width="2"></line>`;
     return svgLine;
+  }
+
+  getAllArrows() {
+    const arrowsTo = [];
+    const arrowsFrom = [];
+
+    this.getImplements().forEach(i => arrowsTo.push(`#${this.getName()}-${i.getName()}-line`));
+    arrowsTo.push(`#${this.getName()}-${this.getInherits().getName()}-line`);
+
+    this.getImplementedBy().forEach(i => arrowsFrom.push(`#${i.getName()}-${this.getName()}-line`));
+    this.getInheritedBy().forEach(i => arrowsFrom.push(`#${i.getName()}-${this.getName()}-line`));
+
+    return {
+      arrowsTo: arrowsTo,
+      arrowsFrom: arrowsFrom
+    };
   }
 }

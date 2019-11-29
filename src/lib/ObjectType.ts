@@ -1,5 +1,6 @@
 export enum ObjectType {
   Class = "Class",
   Interface = "Interface",
-  Default = "Default"
+  Default = "Default",
+  None = "None"
 }
